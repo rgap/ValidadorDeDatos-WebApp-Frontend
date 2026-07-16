@@ -1,7 +1,7 @@
-import { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { getUser } from "../services/authService";
-// import { apiUpload } from "../services/csvService";
+import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getUser } from '../services/authService';
+import { apiUpload } from '../services/csvService';
 
 /**
  * UploadPage — formulario de carga de archivos CSV.
@@ -32,11 +32,10 @@ function UploadPage() {
     setProcessing(true);
 
     // Enviar archivo al endpoint simulado
-    // const response = await apiUpload(selectedFile);
-    const response = { ok: true, data: { validData: [] } };
+    const response = await apiUpload(selectedFile);
 
     if (response.ok) {
-      navigate("/results", { state: { data: response.data } });
+      navigate('/results', { state: { data: response.data } });
     }
 
     setProcessing(false);
@@ -48,12 +47,12 @@ function UploadPage() {
         {/* Encabezado */}
         <div>
           <h1 className="title">Validador de Datos</h1>
-          <p className="subtitle">{user?.name || "Admin"}</p>
+          <p className="subtitle">{user?.name || 'Admin'}</p>
         </div>
 
         {/* Instrucción */}
         <p className="upload-instruction" style={{ marginTop: 20 }}>
-          Solo se permiten archivos CSV con la estructura:{" "}
+          Solo se permiten archivos CSV con la estructura:{' '}
           <strong>id, name, email, age</strong>
         </p>
 
@@ -79,7 +78,7 @@ function UploadPage() {
 
         {/* Nombre del archivo */}
         <p className="upload-file-name">
-          {selectedFile ? selectedFile.name : "Ningún archivo seleccionado"}
+          {selectedFile ? selectedFile.name : 'Ningún archivo seleccionado'}
         </p>
 
         {/* Botón validar o estado de procesamiento */}
