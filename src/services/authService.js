@@ -1,10 +1,10 @@
 /**
- * authService — /api/login
+ * authService — simula el endpoint /api/login
  */
 
 const CREDENTIALS = {
-  email: 'victor.stone@test.com',
-  password: 'victorpass',
+  email: "victor.stone@test.com",
+  password: "victorpass",
 };
 
 /** Utilidad para simular latencia de red. */
@@ -21,17 +21,17 @@ export async function apiLogin(email, password) {
     return {
       ok: true,
       data: {
-        email: 'victor.stone@test.com',
-        name: 'Victor Stone',
-        role: 'admin',
-        token: '123token',
+        email: "victor.stone@test.com",
+        name: "Victor Stone",
+        role: "admin",
+        token: "123token",
       },
     };
   }
 
   return {
     ok: false,
-    error: 'Credenciales inválidas',
+    error: "Credenciales inválidas",
   };
 }
 
@@ -39,15 +39,15 @@ export async function apiLogin(email, password) {
  * Guarda la sesión del usuario en localStorage.
  */
 export function saveSession(data) {
-  localStorage.setItem('token', data.token);
-  localStorage.setItem('user', JSON.stringify(data));
+  localStorage.setItem("token", data.token);
+  localStorage.setItem("user", JSON.stringify(data));
 }
 
 /**
  * Obtiene el usuario guardado en localStorage.
  */
 export function getUser() {
-  const raw = localStorage.getItem('user');
+  const raw = localStorage.getItem("user");
   return raw ? JSON.parse(raw) : null;
 }
 
@@ -56,5 +56,5 @@ export function getUser() {
  */
 export function isAdmin() {
   const user = getUser();
-  return user && user.role === 'admin';
+  return user && user.role === "admin";
 }

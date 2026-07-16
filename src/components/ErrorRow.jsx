@@ -5,9 +5,7 @@ function ErrorRow({ row, onFieldChange, onRetry, corrected }) {
   return (
     <tr>
       {/* Columna ID (row number) */}
-      <td className="table__td-id">
-        {row.row}
-      </td>
+      <td className="table__td-id">{row.row}</td>
 
       {/* Columna Name */}
       <td style={{ padding: 0 }}>
@@ -15,8 +13,8 @@ function ErrorRow({ row, onFieldChange, onRetry, corrected }) {
           <input
             type="text"
             value={row.values.name}
-            onChange={(e) => onFieldChange(row.row, 'name', e.target.value)}
-            className={`table-cell__input${row.details?.name ? ' table-cell__input--error' : ''}`}
+            onChange={(e) => onFieldChange(row.row, "name", e.target.value)}
+            className={`table-cell__input${row.details?.name ? " table-cell__input--error" : ""}`}
             aria-label={`Name fila ${row.row}`}
           />
           {row.details?.name && (
@@ -31,8 +29,8 @@ function ErrorRow({ row, onFieldChange, onRetry, corrected }) {
           <input
             type="text"
             value={row.values.email}
-            onChange={(e) => onFieldChange(row.row, 'email', e.target.value)}
-            className={`table-cell__input${row.details?.email ? ' table-cell__input--error' : ''}`}
+            onChange={(e) => onFieldChange(row.row, "email", e.target.value)}
+            className={`table-cell__input${row.details?.email ? " table-cell__input--error" : ""}`}
             aria-label={`Email fila ${row.row}`}
           />
           {row.details?.email && (
@@ -47,8 +45,8 @@ function ErrorRow({ row, onFieldChange, onRetry, corrected }) {
           <input
             type="text"
             value={row.values.age}
-            onChange={(e) => onFieldChange(row.row, 'age', e.target.value)}
-            className={`table-cell__input${row.details?.age ? ' table-cell__input--error' : ''}`}
+            onChange={(e) => onFieldChange(row.row, "age", e.target.value)}
+            className={`table-cell__input${row.details?.age ? " table-cell__input--error" : ""}`}
             aria-label={`Age fila ${row.row}`}
           />
           {row.details?.age && (
@@ -60,10 +58,10 @@ function ErrorRow({ row, onFieldChange, onRetry, corrected }) {
       {/* Columna acción */}
       <td className="table__td-action">
         <button
-          className={`btn-sm ${corrected ? 'btn-ok' : 'btn-retry'}`}
+          className={`btn-sm ${corrected ? "btn-ok" : "btn-retry"}`}
           onClick={() => onRetry(row.row)}
         >
-          {corrected ? 'Correcto' : 'Reintentar'}
+          {corrected ? "Correcto" : "Reintentar"}
         </button>
       </td>
     </tr>

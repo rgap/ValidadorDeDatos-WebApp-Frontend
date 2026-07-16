@@ -1,5 +1,5 @@
 /**
- * csvService - /api/upload y revalidación
+ * csvService — simula los endpoints /api/upload y revalidación
  */
 
 /** Utilidad para simular latencia de red. */

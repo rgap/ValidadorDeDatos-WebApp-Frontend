@@ -1,28 +1,28 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import FormField from '../components/FormField';
-import { apiLogin, saveSession } from '../services/authService';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import FormField from "../components/FormField";
+import { apiLogin, saveSession } from "../services/authService";
 
 /**
  * LoginPage — formulario de autenticación.
  */
 function LoginPage() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setError('');
+    setError("");
     setLoading(true);
 
     const response = await apiLogin(email, password);
 
     if (response.ok) {
       saveSession(response.data);
-      navigate('/');
+      navigate("/");
     } else {
       setError(response.error);
     }
@@ -49,7 +49,7 @@ function LoginPage() {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
-                setError('');
+                setError("");
               }}
             />
 
@@ -60,7 +60,7 @@ function LoginPage() {
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
-                setError('');
+                setError("");
               }}
               error={error || undefined}
             />
@@ -72,7 +72,7 @@ function LoginPage() {
             className="btn-primary"
             disabled={loading}
           >
-            {loading ? 'Cargando...' : 'Iniciar sesión'}
+            {loading ? "Cargando..." : "Iniciar sesión"}
           </button>
         </form>
       </div>

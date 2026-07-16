@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import ErrorRow from '../components/ErrorRow';
-import { getUser } from '../services/authService';
-import { apiRetry, apiSave } from '../services/csvService';
+import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import ErrorRow from "../components/ErrorRow";
+import { getUser } from "../services/authService";
+import { apiRetry, apiSave } from "../services/csvService";
 
 /**
  * ResultsPage — muestra los resultados de la validación del CSV.
@@ -17,7 +17,7 @@ function ResultsPage() {
   const responseData = location.state?.data ?? { success: [], errors: [] };
 
   const [rows, setRows] = useState(
-    responseData.errors.map((e) => ({ ...e, corrected: false }))
+    responseData.errors.map((e) => ({ ...e, corrected: false })),
   );
   const [saved, setSaved] = useState(false);
 
@@ -33,7 +33,7 @@ function ResultsPage() {
           values: { ...r.values, [field]: value },
           corrected: false,
         };
-      })
+      }),
     );
   }
 
@@ -63,15 +63,15 @@ function ResultsPage() {
       // Registro válido — marcar como correcto
       setRows((prev) =>
         prev.map((r) =>
-          r.row === rowId ? { ...r, details: null, corrected: true } : r
-        )
+          r.row === rowId ? { ...r, details: null, corrected: true } : r,
+        ),
       );
     } else {
       // Actualizar errores del registro
       setRows((prev) =>
         prev.map((r) =>
-          r.row === rowId ? { ...r, details: response.error } : r
-        )
+          r.row === rowId ? { ...r, details: response.error } : r,
+        ),
       );
     }
   }
@@ -85,10 +85,15 @@ function ResultsPage() {
   }
 
   function handleNewFile() {
-    navigate('/');
+    navigate("/");
   }
 
-  const allCorrected = rows.length === 0;
+  const allCorrected = rows.length === 0 || rows.every((r) => r.corrected);
+
+  console.log("--- ResultsPage Render ---");
+  console.log("Rows count:", rows.length);
+  console.log("All corrected?:", allCorrected);
+  console.log("Rows:", rows);
 
   return (
     <main className="page-center">
@@ -97,7 +102,7 @@ function ResultsPage() {
         <div className="results-header">
           <div className="results-brand">
             <h1>Validador de Datos</h1>
-            <p>{user?.name || 'Admin'}</p>
+            <p>{user?.name || "Admin"}</p>
           </div>
           <button
             id="new-file-btn"
@@ -112,7 +117,8 @@ function ResultsPage() {
         {/* Título de sección */}
         <h2 className="results-section-title">Registros con Errores</h2>
         <p className="results-section-desc">
-          Edite los valores incorrectos directamente en los campos y haga clic en "Reintentar" para revalidar.
+          Edite los valores incorrectos directamente en los campos y haga clic
+          en "Reintentar" para revalidar.
         </p>
 
         {/* Tabla de errores */}
@@ -150,12 +156,7 @@ function ResultsPage() {
         {/* Pie con acción de guardar */}
         <div className="results-footer">
           {saved ? (
-            <button
-              id="saved-btn"
-              type="button"
-              className="btn-saved"
-              disabled
-            >
+            <button id="saved-btn" type="button" className="btn-saved" disabled>
               ¡Usuarios guardados con éxito!
             </button>
           ) : (

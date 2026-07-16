@@ -1,5 +1,3 @@
-import React from 'react';
-
 /**
  * FormField — campo de texto con placeholder y etiqueta flotante al escribir.
  */
