@@ -1,34 +1,33 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormField from "../components/FormField";
-// import { apiLogin } from "../services/authService";
+import { apiLogin, saveSession } from "../services/authService";
 
 /**
  * LoginPage — formulario de autenticación.
  */
-
 function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [cargando, setCargando] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
-    setCargando(true);
+    setLoading(true);
 
-    const respuesta = await apiLogin(email, password);
+    const response = await apiLogin(email, password);
 
-    if (respuesta.ok) {
-      guardarSesion(respuesta.data);
+    if (response.ok) {
+      saveSession(response.data);
       navigate("/");
     } else {
-      setError(respuesta.error);
+      setError(response.error);
     }
 
-    setCargando(false);
+    setLoading(false);
   }
 
   return (
@@ -71,9 +70,9 @@ function LoginPage() {
             id="login-submit"
             type="submit"
             className="btn-primary"
-            disabled={cargando}
+            disabled={loading}
           >
-            {cargando ? "Cargando..." : "Iniciar sesión"}
+            {loading ? "Cargando..." : "Iniciar sesión"}
           </button>
         </form>
       </div>

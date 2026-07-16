@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import LoginPage from "./routes/LoginPage.jsx";
 import "./styles/main.css";
-// import UploadPage from "./routes/UploadPage";
+import UploadPage from "./routes/UploadPage";
 // import ResultsPage from "./routes/ResultsPage";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<LoginPage />} />
-        {/* <Route path="/upload" element={<UploadPage />} /> */}
+        <Route path="/upload" element={<UploadPage />} />
         {/* <Route path="/results" element={<ResultsPage />} /> */}
       </Routes>
     </BrowserRouter>
